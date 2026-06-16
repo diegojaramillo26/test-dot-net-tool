@@ -1,4 +1,4 @@
-# AI Dev Agent Template — Fullstack .NET 9+ / Angular 20+ o React 18+
+# AI Dev Agent Template — Fullstack .NET 10+ / Angular 20+ o React 18+
 
 Template minimalista de configuración para agentes de desarrollo IA.
 

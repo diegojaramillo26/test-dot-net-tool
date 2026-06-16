@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # =============================================================================
-# setup.sh — AI Dev Agent: Fullstack .NET 9+ / Angular 20+ o React 18+
+# setup.sh — AI Dev Agent: Fullstack .NET 10+ / Angular 20+ o React 18+
 #
 # Uso: ./setup.sh
 # El script se ubica en la raíz del repositorio.
@@ -25,7 +25,7 @@ log_info() { echo -e "  ${BLUE}→${NC} $1"; }
 
 mdc_frontmatter() {
   case "$1" in
-    backend-dotnet)   printf '%s\n' '---' 'description: Reglas de backend .NET 9+. Aplica en archivos C# y proyectos .NET.' 'globs: "backend/**/*.cs,backend/**/*.csproj,backend/**/appsettings*.json,backend/**/Migrations/**"' 'alwaysApply: false' '---' '' ;;
+    backend-dotnet)   printf '%s\n' '---' 'description: Reglas de backend .NET 10+. Aplica en archivos C# y proyectos .NET.' 'globs: "backend/**/*.cs,backend/**/*.csproj,backend/**/appsettings*.json,backend/**/Migrations/**"' 'alwaysApply: false' '---' '' ;;
     frontend-angular) printf '%s\n' '---' 'description: Reglas de Angular 20+. Aplica en componentes, servicios y rutas Angular.' 'globs: "frontend/**/*.component.ts,frontend/**/*.component.html,frontend/**/*.service.ts,frontend/**/*.guard.ts,frontend/**/app.config.ts"' 'alwaysApply: false' '---' '' ;;
     frontend-react)   printf '%s\n' '---' 'description: Reglas de React 18+. Aplica en archivos TSX, JSX, hooks y stores.' 'globs: "frontend/**/*.tsx,frontend/**/*.jsx,frontend/**/hooks/**/*.ts,frontend/**/stores/**/*.ts"' 'alwaysApply: false' '---' '' ;;
     architecture)     printf '%s\n' '---' 'description: Reglas de arquitectura backend. Aplica al crear o modificar capas.' 'globs: "backend/**/*.cs"' 'alwaysApply: false' '---' '' ;;
@@ -81,7 +81,7 @@ copy_skills() {
 # =============================================================================
 
 gen_claude_md() { cat << 'CLAUDE_MD_END'
-# Claude Code — Fullstack .NET 9+ / Angular 20+ o React 18+
+# Claude Code — Fullstack .NET 10+ / Angular 20+ o React 18+
 
 Lee `AGENTS.md` antes de comenzar cualquier tarea.
 
@@ -181,7 +181,7 @@ MCP_KIRO_END
 
 gen_cursor_general_mdc() { cat << 'CURSOR_GENERAL_END'
 ---
-description: Reglas generales del proyecto fullstack .NET 9+ / Angular o React. Aplica siempre.
+description: Reglas generales del proyecto fullstack .NET 10+ / Angular o React. Aplica siempre.
 alwaysApply: true
 ---
 
@@ -218,7 +218,7 @@ gen_copilot_instructions() { cat << 'COPILOT_INSTR_END'
 
 ## Stack
 
-- **Backend:** .NET 9+ en `backend/`
+- **Backend:** .NET 10+ en `backend/`
 - **Frontend:** Angular 20+ o React 18+ en `frontend/`
 - **Tests .NET:** en `tests/`
 
@@ -589,7 +589,7 @@ description = "Revisor de código para pull requests. Verifica correctness, arqu
 sandbox_mode = "read-only"
 
 developer_instructions = """
-Actúas como tech lead revisando código de un proyecto fullstack .NET 9+ / Angular o React.
+Actúas como tech lead revisando código de un proyecto fullstack .NET 10+ / Angular o React.
 
 Lee AGENTS.md y rules/backend-dotnet.md antes de comenzar.
 
@@ -618,10 +618,10 @@ CODEX_REV_END
 
 gen_codex_test_generator_toml() { cat << 'CODEX_TG_END'
 name        = "test-generator"
-description = "Generador de pruebas TDD para .NET 9+ / Angular o React. Usa xUnit con Assert.* nativo. Sin FluentAssertions."
+description = "Generador de pruebas TDD para .NET 10+ / Angular o React. Usa xUnit con Assert.* nativo. Sin FluentAssertions."
 
 developer_instructions = """
-Actúas como especialista en TDD para proyectos fullstack .NET 9+ / Angular o React.
+Actúas como especialista en TDD para proyectos fullstack .NET 10+ / Angular o React.
 
 Lee AGENTS.md y rules/testing.md antes de comenzar.
 
@@ -650,7 +650,7 @@ CODEX_TG_END
 
 gen_codex_security_reviewer_toml() { cat << 'CODEX_SR_END'
 name        = "security-reviewer"
-description = "Revisor de seguridad OWASP Top 10 para .NET 9+ y frontend Angular o React. Solo lectura."
+description = "Revisor de seguridad OWASP Top 10 para .NET 10+ y frontend Angular o React. Solo lectura."
 sandbox_mode = "read-only"
 
 developer_instructions = """
@@ -691,7 +691,7 @@ Qué actualizas:
 - README.md: comandos, variables de entorno, estructura, instalación.
 - docs/architecture/ o docs/: ADRs y decisiones arquitectónicas.
 - CHANGELOG.md: entradas con formato Keep a Changelog.
-- OpenAPI/Swagger: verifica que nuevos endpoints tienen ProducesResponseType o TypedResults.
+- OpenAPI/Scalar: verifica que nuevos endpoints tienen ProducesResponseType o TypedResults.
 
 Formato ADR:
 ---
@@ -734,7 +734,7 @@ Inspecciona la estructura y respeta las convenciones detectadas.
 ## Estructura del proyecto
 
 ```
-backend/    ← .NET 9+
+backend/    ← .NET 10+
 frontend/   ← Angular 20+ o React 18+
 tests/      ← Pruebas .NET
 ```
@@ -912,7 +912,7 @@ setup_kiro() {
 echo ""
 echo -e "${CYAN}${BOLD}╔══════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}${BOLD}║    AI Dev Agent — Setup de proyecto fullstack        ║${NC}"
-echo -e "${CYAN}${BOLD}║    .NET 9+  /  Angular 20+  /  React 18+            ║${NC}"
+echo -e "${CYAN}${BOLD}║    .NET 10+  /  Angular 20+  /  React 18+            ║${NC}"
 echo -e "${CYAN}${BOLD}╚══════════════════════════════════════════════════════╝${NC}"
 echo ""
 

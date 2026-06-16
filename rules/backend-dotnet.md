@@ -1,7 +1,8 @@
-# Reglas de backend — .NET 9+
+# Reglas de backend — .NET 10+
 
 > Backend en `backend/`. Pruebas en `tests/`.
 > La estructura interna de proyectos depende de la arquitectura elegida al inicio.
+> Cada capa debe vivir en su propio proyecto `.csproj`. Ver regla de aislamiento en `architecture.md`.
 
 ## Configuración obligatoria en proyectos nuevos
 
@@ -113,6 +114,31 @@ public sealed class PaymentService(IHttpClientFactory factory)
 builder.Services.AddHttpClient<IExternalService, ExternalService>()
     .AddStandardResilienceHandler(); // Polly: retries, circuit breaker, timeout
 ```
+
+## Documentación de API — OpenAPI + Scalar (por defecto)
+
+En .NET 10 las plantillas no incluyen Swagger/Swashbuckle. Usa el soporte nativo:
+
+```csharp
+// Program.cs — registro
+builder.Services.AddOpenApi();
+
+// Program.cs — exposición del documento (solo desarrollo)
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();                   // /openapi/v1.json
+    app.MapScalarApiReference();        // /scalar/v1  (UI moderna)
+}
+```
+
+Paquete necesario: `Scalar.AspNetCore` (no instala Swashbuckle).
+
+**Reglas:**
+- Usa `[ProducesResponseType]` o `Produces<T>()` en cada endpoint para enriquecer el documento OpenAPI.
+- `MapOpenApi()` y `MapScalarApiReference()` **solo en desarrollo**. Nunca en producción.
+- **No uses Swashbuckle/Swagger UI** en proyectos nuevos.
+
+---
 
 ## Controllers (cuando se elige estilo MVC)
 

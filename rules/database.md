@@ -16,7 +16,7 @@
 
 ---
 
-## [EF Core 9+]
+## [EF Core 10+]
 
 ### Configuración
 

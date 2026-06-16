@@ -3,6 +3,18 @@
 > Estructura del proyecto: `backend/` para .NET, `frontend/` para Angular/React, `tests/` para pruebas.
 > Aplica SOLO las reglas de la arquitectura confirmada al inicio del proyecto.
 
+---
+
+## Aislamiento por proyecto — Obligatorio
+
+**Cada capa debe vivir en su propio proyecto `.csproj` independiente.** No como carpeta dentro de otro proyecto.
+
+**Motivo:** el límite de ensamblado hace que las dependencias entre capas sean verificables en tiempo de compilación. .NET prohíbe referencias circulares entre proyectos, eliminando una clase entera de violaciones arquitectónicas que las carpetas no pueden prevenir.
+
+**Excepción estricta — Vertical Slice Architecture:** siempre un único proyecto `.csproj`, organizado por feature (slice vertical). No se divide en capas ni se extrae infraestructura compartida a proyecto aparte. El aislamiento en VSA es por feature, no por capa — esa es su premisa fundamental.
+
+---
+
 ## Dependencias entre proyectos permitidas
 
 ### Clean Architecture
@@ -40,15 +52,17 @@ Presentation → Business, Common   ← NUNCA → DataAccess directamente
 
 ## [Clean Architecture] — Estructura de carpetas
 
+> Cada `NombreProyecto.*` es un proyecto `.csproj` independiente (no una carpeta dentro de otro proyecto).
+
 ```
 backend/
-  NombreProyecto.Domain/
+  NombreProyecto.Domain/            ← .csproj propio
     Entities/
     ValueObjects/
     Interfaces/          ← Interfaces de repositorio
     Exceptions/
     Events/
-  NombreProyecto.Application/
+  NombreProyecto.Application/       ← .csproj propio
     Abstractions/
       Mediator/          ← ICommand, IQuery, ISender (patrón propio)
       Repositories/
@@ -61,7 +75,7 @@ backend/
           CreateProductResponse.cs
     Common/
       Mapping/           ← Configuraciones de Mapster
-  NombreProyecto.Infrastructure/
+  NombreProyecto.Infrastructure/    ← .csproj propio
     Repositories/
     Persistence/
       DbContext/
@@ -69,7 +83,7 @@ backend/
       Migrations/
     ExternalServices/
     Mediator/            ← Implementación del Sender
-  NombreProyecto.API/
+  NombreProyecto.API/               ← .csproj propio
     Endpoints/           ← Si usa Minimal API REPR
       Products/
         CreateProductEndpoint.cs
@@ -88,9 +102,11 @@ tests/
 
 ## [Vertical Slice Architecture] — Estructura de carpetas
 
+> **Excepción de aislamiento:** VSA usa un único proyecto `.csproj`. El aislamiento es por feature (slice vertical), no por capa horizontal. `Infrastructure/` es una carpeta interna, no un proyecto separado.
+
 ```
 backend/
-  NombreProyecto.API/
+  NombreProyecto.API/               ← único .csproj (proyecto completo)
     Features/
       Products/
         CreateProduct/
@@ -103,7 +119,7 @@ backend/
           ...
       Orders/
         ...
-    Infrastructure/
+    Infrastructure/                  ← carpeta interna, NO proyecto separado
       Database/
       ExternalServices/
     Program.cs
@@ -118,16 +134,18 @@ tests/
 
 ## [Hexagonal Architecture] — Estructura de carpetas
 
+> Cada `NombreProyecto.*` es un proyecto `.csproj` independiente (no una carpeta dentro de otro proyecto).
+
 ```
 backend/
-  NombreProyecto.Core/
+  NombreProyecto.Core/              ← .csproj propio
     Domain/
     Application/
       Ports/
         Input/           ← Interfaces que el mundo invoca
         Output/          ← Interfaces que la app necesita del exterior
       UseCases/
-  NombreProyecto.Adapters/
+  NombreProyecto.Adapters/          ← .csproj propio (o dividido en Driving/Driven)
     Driving/
       API/               ← REST, gRPC
     Driven/
@@ -142,12 +160,14 @@ tests/
 
 ## [N-Capas] — Estructura de carpetas
 
+> Cada `NombreProyecto.*` es un proyecto `.csproj` independiente (no una carpeta dentro de otro proyecto).
+
 ```
 backend/
-  NombreProyecto.Presentation/
-  NombreProyecto.Business/
-  NombreProyecto.DataAccess/
-  NombreProyecto.Common/
+  NombreProyecto.Presentation/      ← .csproj propio
+  NombreProyecto.Business/          ← .csproj propio
+  NombreProyecto.DataAccess/        ← .csproj propio
+  NombreProyecto.Common/            ← .csproj propio
 tests/
   NombreProyecto.Business.Tests/
   NombreProyecto.DataAccess.Tests/
@@ -219,3 +239,5 @@ app.MapEndpoints(Assembly.GetExecutingAssembly());
 - Handler de una feature importando tipos de otro handler de feature diferente.
 - Presentación (N-Capas) llamando a DataAccess directamente.
 - Adaptador Driving invocando directamente a adaptador Driven (Hexagonal).
+- **Dos o más capas distintas compiladas en el mismo `.csproj`** en Clean/Hexagonal/N-Capas (p. ej. Domain + Application en un único proyecto). ← No aplica a VSA.
+- **Capa implementada como carpeta dentro de otro proyecto** en lugar de proyecto `.csproj` propio (p. ej. `NombreProyecto.API/Domain/` en vez de `NombreProyecto.Domain.csproj`). ← No aplica a VSA.

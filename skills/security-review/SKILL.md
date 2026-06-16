@@ -26,7 +26,7 @@ Lee `security.md` antes de comenzar la revisión.
 
 **A04:** ¿Rate limiting en endpoints sensibles? ¿Sin detalles internos en errores?
 
-**A05:** ¿CORS explícito? ¿Swagger deshabilitado en producción?
+**A05:** ¿CORS explícito? ¿Scalar/OpenAPI deshabilitado en producción?
 
 **A07:** ¿JWT valida firma, `exp`, `iss` y `aud`? ¿Sin tokens en `localStorage`?
 

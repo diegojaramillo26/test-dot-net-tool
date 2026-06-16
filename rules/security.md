@@ -44,7 +44,7 @@
 
 - CORS explícito. Sin `AllowAnyOrigin + AllowCredentials` en producción.
 - CSP configurado en el frontend.
-- Swagger y endpoints de diagnóstico deshabilitados en producción.
+- Scalar/OpenAPI y endpoints de diagnóstico deshabilitados en producción.
 - Timeouts en conexiones de BD y llamadas HTTP externas.
 - Headers mínimos: `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin`.
 

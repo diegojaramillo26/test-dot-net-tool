@@ -67,7 +67,7 @@ fix(auth): correct JWT expiration validation
 refactor(products): extract pricing calculation to value object
 test(users): add integration tests for user repository
 docs(readme): update local setup instructions
-chore(deps): update EF Core to 9.0.2
+chore(deps): update EF Core to 10.0.x
 perf(products): add index on category_id column
 ```
 

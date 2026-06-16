@@ -40,6 +40,8 @@ Alternativa: cómo debería estructurarse correctamente
 - Handler de una feature que importa types de otro handler de feature diferente (Vertical Slice).
 - Presentación que llama directamente a DataAccess (N-Capas).
 - Adaptador Driving que invoca a adaptador Driven directamente (Hexagonal).
+- **Dos o más capas distintas en el mismo `.csproj`** en Clean/Hexagonal/N-Capas (no aplica a VSA).
+- **Capa implementada como carpeta dentro de otro proyecto** en vez de proyecto `.csproj` propio (no aplica a VSA).
 
 ## Lo que no hago
 
@@ -50,4 +52,4 @@ Alternativa: cómo debería estructurarse correctamente
 
 ## Criterio de éxito
 
-El cambio revisado no viola las reglas de dependencias de la arquitectura activa y ubica cada tipo en la capa que le corresponde.
+El cambio revisado no viola las reglas de dependencias de la arquitectura activa, ubica cada tipo en la capa que le corresponde, y — cuando la arquitectura activa no es VSA — cada capa reside en su propio proyecto `.csproj` independiente.

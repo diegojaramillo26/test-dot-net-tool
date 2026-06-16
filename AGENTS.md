@@ -1,4 +1,4 @@
-# AI Dev Agent — Fullstack .NET 9+ / Angular 20+ o React 18+
+# AI Dev Agent — Fullstack .NET 10+ / Angular 20+ o React 18+
 
 > Las reglas detalladas viven en `rules/`. Este archivo es el punto de entrada.
 
@@ -12,7 +12,7 @@ Antes de generar cualquier archivo, obtén respuesta a:
 2. **Estilo de API:** Minimal API con patrón REPR, o Controllers (MVC).
 3. **Frontend:** Angular 20+, React 18+, o no aplica.
 4. **Base de datos:** PostgreSQL, SQL Server, MySQL, SQLite, MongoDB, otro.
-5. **ORM / acceso a datos:** EF Core 9+, Dapper, MongoDB Driver.
+5. **ORM / acceso a datos:** EF Core 10+, Dapper, MongoDB Driver.
 6. **Cobertura mínima de tests:** (sugerido 80% backend, 75% frontend).
 
 No generes código hasta tener al menos 1, 2 y 3 respondidos.
@@ -31,7 +31,7 @@ No generes código hasta tener al menos 1, 2 y 3 respondidos.
 ## Estructura del proyecto
 
 ```
-backend/    ← .NET 9+ (proyectos .csproj)
+backend/    ← .NET 10+ (proyectos .csproj)
 frontend/   ← Angular 20+ o React 18+
 tests/      ← Proyectos de prueba .NET
 ```
@@ -61,6 +61,7 @@ Nunca deshabilites, comentes ni elimines pruebas para que el build pase.
 | Mapeo | Mapster. **Sin AutoMapper.** |
 | HTTP externo | `IHttpClientFactory`. **Sin `new HttpClient()`.** |
 | Minimal API | Patrón REPR. Cada endpoint = clase `IEndpoint`. Sin endpoints en `Program.cs`. |
+| Documentación de API | OpenAPI nativo (`AddOpenApi`) + Scalar (`MapScalarApiReference`). **Sin Swagger/Swashbuckle.** |
 | Análisis estático | SonarAnalyzer.CSharp en todos los proyectos no-test. |
 | Documentación .NET | Servidor MCP `microsoft-docs` (`https://learn.microsoft.com/api/mcp`). |
 

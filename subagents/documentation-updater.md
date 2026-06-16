@@ -31,7 +31,7 @@ description: Actualiza la documentación técnica y funcional del proyecto tras 
 - Guías de despliegue: actualizo cuando cambian procesos, entornos o configuraciones.
 
 ### Contratos de API
-- Si el proyecto tiene OpenAPI/Swagger: verifico que los endpoints nuevos o modificados están documentados con `[ProducesResponseType]` o `TypedResults`.
+- Si el proyecto tiene OpenAPI/Scalar: verifico que los endpoints nuevos o modificados están documentados con `[ProducesResponseType]` o `TypedResults`.
 - Si existe un archivo de colección (Postman, Bruno, etc.): actualizo o noto que debe actualizarse manualmente.
 
 ### CHANGELOG.md (si existe)
